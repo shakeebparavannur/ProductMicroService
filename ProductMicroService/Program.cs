@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProductMicroService.DBContext;
+using ProductMicroService.Repository;
 
 namespace ProductMicroService
 {
@@ -16,7 +17,7 @@ namespace ProductMicroService
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ProductContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            builder.Services.AddTransient<IProductService,ProductService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
